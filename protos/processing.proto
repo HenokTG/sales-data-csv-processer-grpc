@@ -1,0 +1,53 @@
+syntax = "proto3";
+
+package processor;
+
+// --- Messages for Bi-directional Communication ---
+
+// Sent by Client (Gateway) to Server (Processor)
+message CsvChunk {
+    bytes data = 1;
+    // Add optional file_size_bytes for the first chunk
+    optional uint64 file_size_bytes = 2;
+}
+
+// Sent by Server (Processor) to Client (Gateway) for real-time updates
+message ProgressUpdate {
+    oneof content {
+        // Status messages sent during the streaming process
+        ProcessingStatus status_update = 1;
+        // Final summary sent when processing is complete
+        ProcessSummary summary = 2;
+    }
+}
+
+// Sent by Server during processing
+message ProcessingStatus {
+    uint64 rows_processed = 1;
+    uint64 malformed_rows = 2;
+    float processed_percentage = 3;
+    string message = 4; // e.g., "Aggregating sales..."
+}
+
+
+// --- Messages for Final Output ---
+
+// Sent by Server as part of the ProgressUpdate message when finished
+message ProcessSummary {
+    string result_file_name = 1;
+    uint64 rows_processed = 2;
+    uint64 malformed_rows = 3;
+    float processed_percentage = 4;
+    uint64 total_sales = 5;
+    uint64 unique_departments = 6;
+    float processing_time_seconds = 7;
+    optional string storage_result_file_url = 8;
+}
+
+// The core service
+service CsvProcessor {
+    // Bi-directional Streaming RPC:
+    // Client streams CsvChunk (file data) to the Server.
+    // Server streams ProgressUpdate (status/summary) back to the Client.
+    rpc ProcessCsv(stream CsvChunk) returns (stream ProgressUpdate);
+}

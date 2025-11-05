@@ -1,0 +1,5 @@
+{
+    "num_records": 200000000,
+    "num_departments": 500,
+    "output_file": "sales_200M.csv"
+}

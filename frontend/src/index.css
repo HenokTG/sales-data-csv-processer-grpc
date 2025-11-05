@@ -1,0 +1,286 @@
+/* Simple, clean styling for the app */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  width: 100%;
+}
+
+.container {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: #2f2f2f;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  font-size: 2.5rem;
+  color: #58c2f3;
+  margin-bottom: 0.5rem;
+}
+
+header p {
+  font-size: 1.1rem;
+  color: #adadad;
+}
+
+.upload-form {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input[type="file"] {
+  display: none;
+}
+
+.file-label {
+  border: 2px dashed #555;
+  border-radius: 8px;
+  padding: 2rem;
+  cursor: pointer;
+  background-color: #3a3a3a;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.file-label:hover {
+  background-color: #4a4a4a;
+  border-color: #777;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.8em 1.5em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s;
+}
+
+button:hover {
+  background-color: #007acc;
+  border-color: #007acc;
+}
+
+button:disabled {
+  background-color: #333;
+  border-color: #444;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.status-container {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #3a3a3a;
+  border-radius: 8px;
+  min-height: 100px;
+}
+
+.progress-bar {
+  width: 100%;
+  background-color: #555;
+  border-radius: 4px;
+  overflow: hidden;
+  border-radius: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.progress-bar-inner {
+  height: 1rem;
+  line-height: 2rem;
+  background-color: #007acc;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  transition: width 0.3s ease;
+}
+
+.progress-bar-inner.uploading {
+
+  background-color: #007acc;
+
+}
+
+.progress-bar-inner.processing {
+
+  background-color: #00cc22;
+
+}
+
+.status-processing {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  font-size: 1.1rem;
+}
+
+.spinner {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.status-error {
+  color: #ff6b6b;
+  font-weight: bold;
+  background-color: #492424;
+  padding: 1rem;
+  border-radius: 8px;
+}
+
+.status-complete {
+  color: #b0ffb0;
+}
+
+.result-card {
+  background-color: #444;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  text-align: left;
+  color: #eee;
+}
+
+.result-card h4 {
+  margin-top: 0;
+  color: #999;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+}
+
+.result-card ul {
+  list-style: none;
+  padding: 0;
+}
+
+.result-card li {
+  margin-bottom: 0.5rem;
+}
+
+.download-button {
+  display: inline-block;
+  background-color: #28a745;
+  color: white;
+  padding: 0.8em 1.5em;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: bold;
+  margin-top: 1rem;
+  transition: background-color 0.2s;
+  cursor: pointer;
+}
+
+.download-button:hover {
+  background-color: #218838;
+}
+
+.reset-button {
+  margin-top: 1rem;
+  background-color: #555;
+}
+
+.reset-button:hover {
+  background-color: #777;
+}
+
+.file-dropzone {
+  border: 2px dashed #555;
+  border-radius: 8px;
+  padding: 2rem;
+  cursor: pointer;
+  background-color: #3a3a3a;
+  transition: background-color 0.2s, border-color 0.2s;
+}
+
+.file-dropzone.file-selected {
+  background-color: #007acc23;
+  border-color: #007acc;
+}
+
+.file-dropzone:hover {
+  background-color: #4a4a4a;
+  border-color: #777;
+}
+
+.file-dropzone p {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ccc;
+}
+
+.file-dropzone p.text-sm {
+  font-size: 0.9rem;
+  color: #888;
+  margin-top: 0.5rem;
+}
+
+.file-dropzone.file-selected p {
+  color: #e0ffe0;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.summary-list li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.btn-lable-icon {
+  display: inline-flex;
+  align-items: center;
+  height: 20px;
+  gap: 0.5rem;
+}
+
+@keyframes rotate-infinite {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
