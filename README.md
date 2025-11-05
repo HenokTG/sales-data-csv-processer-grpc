@@ -11,7 +11,7 @@ This project demonstrates a high-performance, memory-efficient backend system fo
 The system is designed to aggregate total sales per department from a large CSV file without ever loading the entire file into memory.
 
 <p align="center">
-  <a href="https://github.com/HenokTG/sales-data-csv-processer-grpc/archive/refs/heads/main.zip" style="text-decoration:none;">
+  <a href="https://github.com/HenokTG/sales-data-csv-processer-grpc/archive/refs/heads/master.zip" style="text-decoration:none;">
     <img src="https://img.shields.io/badge/Download-Project_ZIP-green?style=for-the-badge&logo=github" alt="Download Project ZIP" />
   </a>
 </p>
@@ -174,3 +174,4 @@ test/test_processor.py::test_unicode_handling PASSED
 
 ### 5. Use the App
 Open your browser and go to http://localhost:5173. Upload the departments_1M_sales.csv file (or any other CSV) and watch the real-time processing.
+
