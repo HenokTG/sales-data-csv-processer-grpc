@@ -46,6 +46,23 @@ This project uses a decoupled, three-service architecture to ensure scalability 
 4.  **Go CSV Generator (`generator`)**
     * A utility script written in Go to efficiently generate massive (1M+, 10M+) CSV files for testing.
 
+```Bash
+    ┌───────────────────┐    HTTP     ┌──────────────────┐    gRPC Stream    ┌──────────────────┐
+    │   React Frontend  │ ◄──────────►│  FastAPI Gateway │ ◄────────────────►│  gRPC Processor  │
+    │                   │             │                  │                   │                  │
+    │ - Progress bars   │             │ - HTTP handling  │                   │ - CSV processing │
+    │ - File upload     │             │ - gRPC client    │                   │ - Aggregation    │
+    │ - Results display │             │ - CORS           │                   │ - Streaming      │
+    └───────────────────┘             └──────────────────┘                   └──────────────────┘
+                                             │                                      │
+                                             │                                      │
+                                    ┌────────▼────────┐                    ┌────────▼────────┐
+                                    │   Go CSV Gen    │                    │  Storage (S3)   │
+                                    │                 │                    │ - Partial implemntation 
+                                    │ - Test data     │                    │ - Result files  │
+                                    │ - Performance   │                    │ - Optional      │
+                                    └─────────────────┘                    └─────────────────┘
+```
 ---
 
 ## Algorithm & Memory-Efficiency Strategy
@@ -82,6 +99,11 @@ The file itself is never loaded, only read chunk-by-chunk.
 * **Space Complexity: `O(D)`**
     * Where `D` is the number of **unique departments**. This is the key benefit. The memory usage does *not* depend on the file size or total number of rows, only on the number of departments to be aggregated.
 
+```bash
+  CSV File → Chunked Reading → Line Parsing → Department Aggregation → Results
+     ↓              ↓              ↓                    ↓               ↓
+   O(N)           O(1)           O(1)                  O(D)            O(D)
+```
 ---
 
 ## How to Run the Application
@@ -174,4 +196,5 @@ test/test_processor.py::test_unicode_handling PASSED
 
 ### 5. Use the App
 Open your browser and go to http://localhost:5173. Upload the departments_1M_sales.csv file (or any other CSV) and watch the real-time processing.
+
 
